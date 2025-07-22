@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: logistic-organizations
+  config:
+    import: configserver:http://logistic-configserver:8071
