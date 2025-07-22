@@ -24,6 +24,10 @@ public class OrganizationService {
         return organizationRepository.findById(id).map(organizationMapper::toOrganizationDto).orElse(null);
     }
 
+    public OrganizationDto getOrganizationByName(String name) {
+        return organizationRepository.findByName(name).map(organizationMapper::toOrganizationDto).orElse(null);
+    }
+
     public void createOrganization(OrganizationDto organizationDto) {
         organizationRepository.save(organizationMapper.toOrganization(organizationDto));
     }

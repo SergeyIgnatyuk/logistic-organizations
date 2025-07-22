@@ -25,10 +25,10 @@ public class OrganizationController {
         return organizationService.getAllOrganizations();
     }
 
-    @GetMapping("/{id}")
-    @Operation(summary = "Получить информацию об организации по ID")
-    public OrganizationDto getOrganizationById(@PathVariable UUID id) {
-        return organizationService.getOrganizationById(id);
+    @GetMapping("/{name}")
+    @Operation(summary = "Получить информацию об организации по названию")
+    public OrganizationDto getOrganizationByName(@PathVariable String name) {
+        return organizationService.getOrganizationByName(name);
     }
 
     @PostMapping
