@@ -31,7 +31,7 @@ public class OrganizationController {
         return organizationService.getOrganizationByName(name);
     }
 
-    @PostMapping
+    @PostMapping("/new")
     @Operation(summary = "Создать новую организацию")
     public ResponseEntity<String> createContract(@RequestBody OrganizationDto organization) {
         organizationService.createOrganization(organization);
