@@ -1,7 +1,8 @@
 package by.logisticorganizations.controller;
 
-import by.logisticorganizations.dto.OrganizationDto;
 import by.logisticorganizations.service.OrganizationService;
+import by.logisticspec.api.OrganizationApi;
+import by.logisticspec.model.OrganizationDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -9,31 +10,28 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/organizations")
-@Tag(name = "Контроллер для получения информации по организациям")
 @RequiredArgsConstructor
-public class OrganizationController {
+public class OrganizationController implements OrganizationApi {
 
     private final OrganizationService organizationService;
 
-    @GetMapping
-    @Operation(summary = "Получить информацию обо всех организациях")
-    public Iterable<OrganizationDto> getAllOrganizations() {
-        return organizationService.getAllOrganizations();
+    @Override
+    public ResponseEntity<List<OrganizationDto>> getOrganizations() {
+        return new ResponseEntity<>(organizationService.getAllOrganizations(), HttpStatus.OK);
     }
 
-    @GetMapping("/{name}")
-    @Operation(summary = "Получить информацию об организации по названию")
-    public OrganizationDto getOrganizationByName(@PathVariable String name) {
-        return organizationService.getOrganizationByName(name);
+    @Override
+    public ResponseEntity<OrganizationDto> getOrganizationByName(String name) {
+        return new ResponseEntity<>(organizationService.getOrganizationByName(name), HttpStatus.OK);
     }
 
-    @PostMapping
-    @Operation(summary = "Создать новую организацию")
-    public ResponseEntity<String> createContract(@RequestBody OrganizationDto organization) {
+    @Override
+    public ResponseEntity<String> createOrganization(OrganizationDto organization) {
         organizationService.createOrganization(organization);
         return new ResponseEntity<>("Organization has been created", HttpStatus.CREATED);
     }

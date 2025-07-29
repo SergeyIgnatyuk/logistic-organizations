@@ -1,7 +1,7 @@
 package by.logisticorganizations.mapper;
 
-import by.logisticorganizations.dto.OrganizationDto;
 import by.logisticorganizations.entity.Organization;
+import by.logisticspec.model.OrganizationDto;
 import org.mapstruct.Mapper;
 
 import java.util.List;

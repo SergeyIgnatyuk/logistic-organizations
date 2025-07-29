@@ -1,8 +1,8 @@
 package by.logisticorganizations.service;
 
-import by.logisticorganizations.dto.OrganizationDto;
 import by.logisticorganizations.mapper.OrganizationMapper;
 import by.logisticorganizations.repository.OrganizationRepository;
+import by.logisticspec.model.OrganizationDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
