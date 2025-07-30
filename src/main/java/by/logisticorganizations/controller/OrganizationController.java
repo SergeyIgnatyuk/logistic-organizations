@@ -4,11 +4,15 @@ import by.logisticorganizations.service.OrganizationService;
 import by.logisticspec.api.OrganizationApi;
 import by.logisticspec.model.OrganizationDto;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,6 +20,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/organizations")
 @RequiredArgsConstructor
+@Validated
 public class OrganizationController implements OrganizationApi {
 
     private final OrganizationService organizationService;
@@ -31,7 +36,7 @@ public class OrganizationController implements OrganizationApi {
     }
 
     @Override
-    public ResponseEntity<String> createOrganization(OrganizationDto organization) {
+    public ResponseEntity<String> createOrganization(@Valid OrganizationDto organization) {
         organizationService.createOrganization(organization);
         return new ResponseEntity<>("Organization has been created", HttpStatus.CREATED);
     }

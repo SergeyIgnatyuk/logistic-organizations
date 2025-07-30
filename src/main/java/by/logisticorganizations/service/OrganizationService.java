@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @Service
@@ -25,7 +26,9 @@ public class OrganizationService {
     }
 
     public OrganizationDto getOrganizationByName(String name) {
-        return organizationRepository.findByName(name).map(organizationMapper::toOrganizationDto).orElse(null);
+        return organizationRepository.findByName(name)
+                .map(organizationMapper::toOrganizationDto)
+                .orElseThrow(() -> new NoSuchElementException("Organization has been not found!!!"));
     }
 
     public void createOrganization(OrganizationDto organizationDto) {
