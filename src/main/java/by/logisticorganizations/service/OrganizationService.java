@@ -31,8 +31,8 @@ public class OrganizationService {
                 .orElseThrow(() -> new NoSuchElementException("Organization has been not found!!!"));
     }
 
-    public void createOrganization(OrganizationDto organizationDto) {
-        organizationRepository.save(organizationMapper.toOrganization(organizationDto));
+    public OrganizationDto createOrganization(OrganizationDto organizationDto) {
+        return organizationMapper.toOrganizationDto(organizationRepository.save(organizationMapper.toOrganization(organizationDto)));
     }
 
     public void deleteOrganizationById(UUID id) {
