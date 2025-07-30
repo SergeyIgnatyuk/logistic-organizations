@@ -20,7 +20,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/organizations")
 @RequiredArgsConstructor
-@Validated
 public class OrganizationController implements OrganizationApi {
 
     private final OrganizationService organizationService;
@@ -36,9 +35,8 @@ public class OrganizationController implements OrganizationApi {
     }
 
     @Override
-    public ResponseEntity<String> createOrganization(@Valid OrganizationDto organization) {
-        organizationService.createOrganization(organization);
-        return new ResponseEntity<>("Organization has been created", HttpStatus.CREATED);
+    public ResponseEntity<OrganizationDto> createOrganization(OrganizationDto organization) {
+        return new ResponseEntity<>(organizationService.createOrganization(organization), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
