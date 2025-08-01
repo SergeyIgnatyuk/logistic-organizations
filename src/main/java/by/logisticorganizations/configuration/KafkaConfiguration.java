@@ -27,6 +27,8 @@ public class KafkaConfiguration {
         configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "logistic-main-group");
         configProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+        configProps.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "true");
+        configProps.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "5000");
         return new DefaultKafkaConsumerFactory<>(configProps);
     }
 
@@ -35,7 +37,6 @@ public class KafkaConfiguration {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         factory.setConcurrency(3);
-        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
         return factory;
     }
 }
